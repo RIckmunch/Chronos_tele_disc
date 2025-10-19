@@ -1,0 +1,51 @@
+PATTERN DISCOVERY AND QUESTION GENERATION RESULTS
+================================================================================
+
+Pattern: DESCRIBED_IN
+Example: Staffel → skeleton_development
+Question: "Has Staffel described in skeleton development?"
+Matching paths: 5
+--------------------------------------------------------------------------------
+
+Pattern: ASSOCIATED_WITH
+Example: standing_posture → skeleton_development
+Question: "Has standing posture associated with skeleton development?"
+Matching paths: 5
+--------------------------------------------------------------------------------
+
+Pattern: RESPONDS_TO
+Example: Rumpf → Schwerptmkt
+Question: "Has Rumpf responds to Schwerptmkt?"
+Matching paths: 5
+--------------------------------------------------------------------------------
+
+Pattern: PRECEDES
+Example: newborn_spine → adult_spine
+Question: "Has newborn spine precedes adult spine?"
+Matching paths: 1
+--------------------------------------------------------------------------------
+
+Pattern: CO_OCCURS_WITH
+Example: Kniegelenke → Normalhaltung
+Question: "Has Kniegelenke co occurs with Normalhaltung?"
+Matching paths: 5
+--------------------------------------------------------------------------------
+
+Pattern: DESCRIBED_IN → ASSOCIATED_WITH
+Example: Langer → normal_posture → spinal_column
+Question: "Has Langer described in normal posture and also associated with spinal column?"
+Matching paths: 5
+--------------------------------------------------------------------------------
+
+Pattern: ASSOCIATED_WITH → DESCRIBED_IN
+Example: center_of_gravity → normal_posture → Parow
+Question: "Has center of gravity associated with normal posture and also described in Parow?"
+Matching paths: 5
+--------------------------------------------------------------------------------
+
+Pattern: RESPONDS_TO → DESCRIBED_IN
+Example: hip_joint_position → normal_posture → Parow
+Question: "Has hip joint position responds to normal posture and also described in Parow?"
+Matching paths: 3
+--------------------------------------------------------------------------------
+

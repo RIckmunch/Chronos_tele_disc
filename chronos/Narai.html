@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ตำราพระโอสถพระนารายณ์
+    </title>
+        <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        #network {
+            width: 100%;
+            height: 100vh;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin: 10px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>ตำราพระโอสถพระนารายณ์
+    </h1>
+    <div id="network"></div>
+
+    <script>
+        // Define nodes
+        const nodesData = [
+            // Traditional Remedies
+            { id: 'R1', label: 'Mahavisavakrabhathat Oil', group: 'remedy' },
+            { id: 'R2', label: 'Mahaprasilp Oil', group: 'remedy' },
+            { id: 'R3', label: 'Tha Chetiya Phra That Medicine', group: 'remedy' },
+            { id: 'R4', label: 'Mahachulathip Medicine', group: 'remedy' },
+            { id: 'R5', label: 'Herbal Compress/Luk Prakob', group: 'remedy' },
+            { id: 'R6', label: 'Beeswax for Nerves', group: 'remedy' },
+            { id: 'R7', label: 'Numbness & Tingling Decoction', group: 'remedy' },
+            // Plants and Ingredients
+            { id: 'P1', label: 'Saussurea lappa', group: 'plant' },
+            { id: 'P2', label: 'Curcuma longa', group: 'plant' },
+            { id: 'P3', label: 'Acorus calamus', group: 'plant' },
+            { id: 'P4', label: 'Piper longum', group: 'plant' },
+            { id: 'P5', label: 'Zingiber officinale', group: 'plant' },
+            { id: 'P6', label: 'Cinnamomum verum', group: 'plant' },
+            { id: 'P7', label: 'Tamarindus indica', group: 'plant' },
+            { id: 'P8', label: 'Beeswax', group: 'plant' },
+            { id: 'P9', label: 'Animal oils/milks', group: 'plant' },
+            { id: 'P10', label: 'Zingiber cassumunar', group: 'plant' },
+            { id: 'P11', label: 'Piper nigrum', group: 'plant' },
+            { id: 'P12', label: 'Cymbopogon citratus', group: 'plant' },
+            // Bioactive Compounds
+            { id: 'C1', label: 'Costunolide', group: 'compound' },
+            { id: 'C2', label: 'Curcumin', group: 'compound' },
+            { id: 'C3', label: 'β-asarone', group: 'compound' },
+            { id: 'C4', label: 'Piperine', group: 'compound' },
+            { id: 'C5', label: 'Gingerol', group: 'compound' },
+            { id: 'C6', label: 'Cinnamaldehyde', group: 'compound' },
+            { id: 'C7', label: 'Omega-3 fatty acids', group: 'compound' },
+            { id: 'C8', label: 'Cassumunarins', group: 'compound' },
+            // Traditional Concepts
+            { id: 'T1', label: 'Vayodhatu/Air element imbalance', group: 'concept' },
+            { id: 'T2', label: 'Techodhatu/Fire element imbalance', group: 'concept' },
+            { id: 'T3', label: 'Apodhatu/Water element imbalance', group: 'concept' },
+            { id: 'T4', label: 'Pathvidhatu/Earth element imbalance', group: 'concept' },
+            { id: 'T5', label: 'Nerve stiffness/Phra Sen', group: 'concept' },
+            { id: 'T6', label: 'Paralysis/Thapruek', group: 'concept' },
+            { id: 'T7', label: 'Numbness/Tingling', group: 'concept' },
+            // Physiological Mechanisms
+            { id: 'M1', label: 'Improved microcirculation', group: 'mechanism' },
+            { id: 'M2', label: 'Anti-inflammatory effects', group: 'mechanism' },
+            { id: 'M3', label: 'Neurostimulation', group: 'mechanism' },
+            { id: 'M4', label: 'Muscle relaxation', group: 'mechanism' },
+            { id: 'M5', label: 'Thermal effects', group: 'mechanism' },
+            { id: 'M6', label: 'Nerve repair', group: 'mechanism' },
+            { id: 'M7', label: 'Systemic balancing', group: 'mechanism' },
+            // Modern Conditions
+            { id: 'D1', label: 'Spinal venous congestion', group: 'condition' },
+            { id: 'D2', label: 'Radiculopathy', group: 'condition' },
+            { id: 'D3', label: 'Spinal cord injury', group: 'condition' },
+            { id: 'D4', label: 'Myofascial pain', group: 'condition' },
+            { id: 'D5', label: 'Neuropathy', group: 'condition' },
+            { id: 'D6', label: 'Spasticity', group: 'condition' },
+            { id: 'D7', label: 'Spinal inflammation', group: 'condition' },
+            // Research Approaches
+            { id: 'A1', label: 'Advanced imaging', group: 'research' },
+            { id: 'A2', label: 'Preclinical models', group: 'research' },
+            { id: 'A3', label: 'Phytochemical analysis', group: 'research' },
+            { id: 'A4', label: 'Clinical trials', group: 'research' },
+            { id: 'A5', label: 'Biomechanical assessment', group: 'research' },
+            { id: 'A6', label: 'Metabolomics', group: 'research' },
+            { id: 'A7', label: 'Electrophysiology', group: 'research' },
+            // Therapeutic Applications
+            { id: 'Th1', label: 'Transdermal therapies', group: 'application' },
+            { id: 'Th2', label: 'Plant-based neurostimulants', group: 'application' },
+            { id: 'Th3', label: 'Enhanced thermotherapy', group: 'application' },
+            { id: 'Th4', label: 'Personalized spine care', group: 'application' },
+            { id: 'Th5', label: 'Massage protocols', group: 'application' },
+            { id: 'Th6', label: 'Integrative lifestyle interventions', group: 'application' },
+            { id: 'Th7', label: 'Neuropathic pain management', group: 'application' },
+            // Hypotheses
+            { id: 'H1', label: 'Herbal Oils', group: 'hypothesis' },
+            { id: 'H2', label: 'Stimulant Herbs', group: 'hypothesis' },
+            { id: 'H3', label: 'Herbal Compresses', group: 'hypothesis' },
+            { id: 'H4', label: 'Elemental Diagnosis', group: 'hypothesis' },
+            { id: 'H5', label: 'Animal Ingredients', group: 'hypothesis' },
+            { id: 'H6', label: 'Massage Techniques', group: 'hypothesis' },
+            { id: 'H7', label: 'Lifestyle Interventions', group: 'hypothesis' },
+            { id: 'H8', label: 'Numbness Treatment', group: 'hypothesis' },
+           
+        ];
+
+        // Define edges
+        const edgesData = [
+            // Remedies to Plants
+            { from: 'R1', to: 'P1', label: 'Contains' },
+            { from: 'R1', to: 'P2', label: 'Contains' },
+            { from: 'R1', to: 'P9', label: 'Contains' },
+            { from: 'R2', to: 'P2', label: 'Contains' },
+            { from: 'R2', to: 'P5', label: 'Contains' },
+            { from: 'R3', to: 'P4', label: 'Contains' },
+            { from: 'R3', to: 'P3', label: 'Contains' },
+            { from: 'R4', to: 'P4', label: 'Contains' },
+            { from: 'R4', to: 'P5', label: 'Contains' },
+            { from: 'R5', to: 'P6', label: 'Contains' },
+            { from: 'R5', to: 'P5', label: 'Contains' },
+            { from: 'R5', to: 'P7', label: 'Contains' },
+            { from: 'R6', to: 'P8', label: 'Contains' },
+            { from: 'R6', to: 'P9', label: 'Contains' },
+            { from: 'R7', to: 'P10', label: 'Contains' },
+            { from: 'R7', to: 'P11', label: 'Contains' },
+            { from: 'R7', to: 'P12', label: 'Contains' },
+            // Plants to Compounds
+            { from: 'P1', to: 'C1', label: 'Yields' },
+            { from: 'P2', to: 'C2', label: 'Yields' },
+            { from: 'P3', to: 'C3', label: 'Yields' },
+            { from: 'P4', to: 'C4', label: 'Yields' },
+            { from: 'P5', to: 'C5', label: 'Yields' },
+            { from: 'P6', to: 'C6', label: 'Yields' },
+            { from: 'P9', to: 'C7', label: 'Contains' },
+            { from: 'P10', to: 'C8', label: 'Yields' },
+            { from: 'P11', to: 'C4', label: 'Yields' },
+            // Remedies to Traditional Concepts
+            { from: 'R1', to: 'T6', label: 'Treats' },
+            { from: 'R1', to: 'T5', label: 'Treats' },
+            { from: 'R2', to: 'T6', label: 'Treats' },
+            { from: 'R3', to: 'T1', label: 'Treats' },
+            { from: 'R3', to: 'T5', label: 'Treats' },
+            { from: 'R4', to: 'T1', label: 'Treats' },
+            { from: 'R5', to: 'T5', label: 'Treats' },
+            { from: 'R6', to: 'T6', label: 'Treats' },
+            { from: 'R7', to: 'T7', label: 'Treats' },
+            // Compounds to Mechanisms
+            { from: 'C1', to: 'M1', label: 'Promotes' },
+            { from: 'C1', to: 'M2', label: 'Provides' },
+            { from: 'C2', to: 'M2', label: 'Provides' },
+            { from: 'C2', to: 'M6', label: 'Supports' },
+            { from: 'C3', to: 'M3', label: 'Promotes' },
+            { from: 'C4', to: 'M3', label: 'Promotes' },
+            { from: 'C5', to: 'M1', label: 'Promotes' },
+            { from: 'C5', to: 'M2', label: 'Provides' },
+            { from: 'C6', to: 'M2', label: 'Provides' },
+            { from: 'C6', to: 'M4', label: 'Promotes' },
+            { from: 'C7', to: 'M6', label: 'Supports' },
+            { from: 'C8', to: 'M2', label: 'Provides' },
+            // Remedies to Mechanisms
+            { from: 'R1', to: 'M1', label: 'Promotes' },
+            { from: 'R1', to: 'M2', label: 'Provides' },
+            { from: 'R2', to: 'M1', label: 'Promotes' },
+            { from: 'R3', to: 'M3', label: 'Promotes' },
+            { from: 'R3', to: 'M7', label: 'Affects' },
+            { from: 'R4', to: 'M3', label: 'Promotes' },
+            { from: 'R5', to: 'M5', label: 'Provides' },
+            { from: 'R5', to: 'M4', label: 'Promotes' },
+            { from: 'R6', to: 'M6', label: 'Supports' },
+            { from: 'R7', to: 'M3', label: 'Affects' },
+            { from: 'R7', to: 'M7', label: 'Affects' },
+            // Traditional Concepts to Modern Conditions
+            { from: 'T1', to: 'D2', label: 'Corresponds to' },
+            { from: 'T1', to: 'D6', label: 'Corresponds to' },
+            { from: 'T2', to: 'D7', label: 'Corresponds to' },
+            { from: 'T5', to: 'D2', label: 'Corresponds to' },
+            { from: 'T5', to: 'D4', label: 'Corresponds to' },
+            { from: 'T6', to: 'D3', label: 'Corresponds to' },
+            { from: 'T6', to: 'D6', label: 'Corresponds to' },
+            { from: 'T7', to: 'D5', label: 'Corresponds to' },
+            // Mechanisms to Modern Conditions
+            { from: 'M1', to: 'D1', label: 'Addresses' },
+            { from: 'M2', to: 'D7', label: 'Addresses' },
+            { from: 'M2', to: 'D2', label: 'Addresses' },
+            { from: 'M3', to: 'D3', label: 'Addresses' },
+            { from: 'M3', to: 'D6', label: 'Addresses' },
+            { from: 'M4', to: 'D4', label: 'Addresses' },
+            { from: 'M5', to: 'D4', label: 'Addresses' },
+            { from: 'M6', to: 'D3', label: 'Addresses' },
+            { from: 'M6', to: 'D5', label: 'Addresses' },
+            { from: 'M7', to: 'D7', label: 'Addresses' },
+            // Research Approaches to Mechanisms
+            { from: 'A1', to: 'M1', label: 'Investigates' },
+            { from: 'A1', to: 'D1', label: 'Investigates' },
+            { from: 'A2', to: 'M3', label: 'Investigates' },
+            { from: 'A2', to: 'M6', label: 'Investigates' },
+            { from: 'A3', to: 'C1', label: 'Investigates' },
+            { from: 'A3', to: 'C2', label: 'Investigates' },
+            { from: 'A3', to: 'C4', label: 'Investigates' },
+            { from: 'A4', to: 'M1', label: 'Investigates' },
+            { from: 'A4', to: 'M2', label: 'Investigates' },
+            { from: 'A5', to: 'M4', label: 'Investigates' },
+            { from: 'A5', to: 'M5', label: 'Investigates' },
+            { from: 'A6', to: 'M7', label: 'Investigates' },
+            { from: 'A7', to: 'M3', label: 'Investigates' },
+            // Mechanisms to Therapeutic Applications
+            { from: 'M1', to: 'Th1', label: 'Supports' },
+            { from: 'M2', to: 'Th1', label: 'Supports' },
+            { from: 'M2', to: 'Th7', label: 'Supports' },
+            { from: 'M3', to: 'Th2', label: 'Supports' },
+            { from: 'M4', to: 'Th5', label: 'Supports' },
+            { from: 'M5', to: 'Th3', label: 'Supports' },
+            { from: 'M6', to: 'Th7', label: 'Supports' },
+            { from: 'M7', to: 'Th4', label: 'Supports' },
+            { from: 'M7', to: 'Th6', label: 'Supports' },
+            // Hypothesis Connections
+            { from: 'H1', to: 'R1', label: 'Focuses on' },
+            { from: 'H1', to: 'D1', label: 'Addresses' },
+            { from: 'H1', to: 'M1', label: 'Proposes' },
+            { from: 'H1', to: 'Th1', label: 'Leads to' },
+            { from: 'H2', to: 'R3', label: 'Focuses on' },
+            { from: 'H2', to: 'R4', label: 'Focuses on' },
+            { from: 'H2', to: 'M3', label: 'Proposes' },
+            { from: 'H2', to: 'Th2', label: 'Leads to' },
+            { from: 'H3', to: 'R5', label: 'Focuses on' },
+            { from: 'H3', to: 'D4', label: 'Addresses' },
+            { from: 'H3', to: 'M5', label: 'Proposes' },
+            { from: 'H3', to: 'Th3', label: 'Leads to' },
+            { from: 'H4', to: 'T1', label: 'Focuses on' },
+            { from: 'H4', to: 'T2', label: 'Focuses on' },
+            { from: 'H4', to: 'T3', label: 'Focuses on' },
+            { from: 'H4', to: 'T4', label: 'Focuses on' },
+            { from: 'H4', to: 'M7', label: 'Proposes' },
+            { from: 'H4', to: 'Th4', label: 'Leads to' },
+            { from: 'H5', to: 'P8', label: 'Focuses on' },
+            { from: 'H5', to: 'P9', label: 'Focuses on' },
+            { from: 'H5', to: 'M6', label: 'Proposes' },
+            { from: 'H5', to: 'D3', label: 'Addresses' },
+            { from: 'H6', to: 'R1', label: 'Associated with' },
+            { from: 'H6', to: 'M4', label: 'Proposes' },
+            { from: 'H6', to: 'Th5', label: 'Leads to' },
+            { from: 'H7', to: 'T1', label: 'Focuses on' },
+            { from: 'H7', to: 'M7', label: 'Proposes' },
+            { from: 'H7', to: 'Th6', label: 'Leads to' },
+            { from: 'H8', to: 'R7', label: 'Focuses on' },
+            { from: 'H8', to: 'D5', label: 'Addresses' },
+            { from: 'H8', to: 'M3', label: 'Proposes' },
+            { from: 'H8', to: 'Th7', label: 'Leads to' }
+        ];
+
+        // Create a network
+        const container = document.getElementById('network');
+        const nodes = new vis.DataSet(nodesData);
+        const edges = new vis.DataSet(edgesData);
+
+        // Provide the data in the vis format
+        const data = {
+            nodes: nodes,
+            edges: edges
+        };
+
+        // Configuration options
+        const options = {
+            nodes: {
+                shape: 'dot',
+                size: 20,
+                font: {
+                    size: 12,
+                    face: 'Arial'
+                },
+                borderWidth: 2
+            },
+            edges: {
+                arrows: 'to',
+                font: {
+                    size: 10,
+                    align: 'middle'
+                },
+                smooth: {
+                    type: 'continuous'
+                }
+            },
+            groups: {
+                remedy: { color: { background: '#f9d5e5', border: '#333' } },
+                plant: { color: { background: '#eeeeee', border: '#333' } },
+                compound: { color: { background: '#d0f0c0', border: '#333' } },
+                concept: { color: { background: '#d6eaf8', border: '#333' } },
+                mechanism: { color: { background: '#fdebd0', border: '#333' } },
+                condition: { color: { background: '#e8daef', border: '#333' } },
+                research: { color: { background: '#f5cba7', border: '#333' } },
+                application: { color: { background: '#aed6f1', border: '#333' } },
+                hypothesis: { color: { background: '#f9e79f', border: '#333' } },
+            },
+            physics: {
+                forceAtlas2Based: {
+                    gravitationalConstant: -50,
+                    centralGravity: 0.01,
+                    springLength: 100,
+                    springConstant: 0.08
+                },
+                maxVelocity: 50,
+                solver: 'forceAtlas2Based',
+                timestep: 0.35,
+                stabilization: { iterations: 150 }
+            },
+            interaction: {
+                hover: true,
+                zoomView: true,
+                dragView: true
+            }
+        };
+
+        // Initialize and render the network
+        const network = new vis.Network(container, data, options);
+    </script>
+</body>
+</html>

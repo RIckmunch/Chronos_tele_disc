@@ -1,0 +1,21 @@
+================================================================================
+HYPOTHESIS VERIFICATION RESULT (OWL)
+================================================================================
+
+Question: "Has extreme posture associated with lateral equilibrium pelvis?"
+
+Timestamp: 2025-10-18T19:26:18.700355
+
+--------------------------------------------------------------------------------
+OWL RESPONSE:
+--------------------------------------------------------------------------------
+Yes. Multiple peer‐reviewed studies demonstrate an association between extreme posture and alterations in the lateral equilibrium of the pelvis.
+
+The first study (lazennec2011hip–spinerelationsand pages 11-13) explicitly addresses the impact of extreme pelvic rotation—commonly seen in conditions such as scoliosis—on the orientation of the acetabulum and overall trunk balance. This study articulates that abnormal or extreme postures can directly affect lateral equilibrium by modifying pelvic orientation. The authors emphasize that such postural deviations are clinically significant since they can influence the outcomes of hip and spinal surgeries, indicating that extreme posture is inherently related to lateral pelvic stability (lazennec2011hip–spinerelationsand pages 11-13).
+
+The second source (lazennec2013lumbarpelvicfemoralbalanceon pages 14-17) reinforces this association by discussing how variations in pelvic position, particularly those arising from extreme postural changes, lead to asymmetries in pelvic orientation. This study details the consequences on functional anteversion of the hip joint and overall balance control. The analysis indicates that as the pelvic alignment changes during extreme postural configurations (e.g., during sitting versus standing), lateral equilibrium may be adversely affected. The observed pelvic asymmetries support the concept that extreme postural deviations contribute to an imbalance in lateral equilibrium (lazennec2013lumbarpelvicfemoralbalanceon pages 14-17).
+
+In addition, the study represented by (dalleau2012pelvismorphologytrunk pages 3-4) examines the relationship between trunk posture and balance in individuals with varying severity of scoliosis. Here, severe cases exhibiting marked trunk inclinations and acromion rotations demonstrated signs of altered lateral stability. Although the focus of the paper is primarily on standing imbalance via measures such as the Center of Pressure (COP) and free moment (Tz), the findings imply that more extreme postural changes in scoliotic patients result in significant perturbations in lateral pelvic equilibrium. The correlation described in this source underscores that extreme postural factors—manifested as pronounced trunk deviations—are linked to a disruption in the lateral balance of the pelvis (dalleau2012pelvismorphologytrunk pages 3-4).
+
+Each of these studies contributes to a consistent narrative: that structural and functional deviations in posture are quantitatively and qualitatively associated with alterations in the lateral equilibrium of the pelvis. In particular, the work from (lazennec2011hip–spinerelationsand pages 11-13) provides explicit evidence of how extreme pelvic rotation alters acetabular orientation, while (lazennec2013lumbarpelvicfemoralbalanceon pages 14-17) describes how abnormal postural configurations affect overall balance by inducing pelvic asymmetries. Complementarily, (dalleau2012pelvismorphologytrunk pages 3-4) demonstrates that in severe scoliotic cases, extreme trunk inclinations correlate with impaired lateral stability. Together, these independent accounts confirm that the claim—extreme posture is associated with lateral equilibrium of the pelvis—has been substantiated in the literature (lazennec2011hip–spinerelationsand pages 11-13, lazennec2013lumbarpelvicfemoralbalanceon pages 14-17, dalleau2012pelvismorphologytrunk pages 3-4).
+

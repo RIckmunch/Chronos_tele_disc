@@ -1,0 +1,21 @@
+================================================================================
+HYPOTHESIS VERIFICATION RESULT (OWL)
+================================================================================
+
+Question: "Has spinal conditions associated with traditional medicine?"
+
+Timestamp: 2025-10-18T23:23:52.677211
+
+--------------------------------------------------------------------------------
+OWL RESPONSE:
+--------------------------------------------------------------------------------
+Yes. Multiple papers demonstrate an association between spinal conditions and traditional medicine. Clinical trial reports show that integrated treatment approaches—combining conventional medicine with complementary and alternative modalities like herbal medicine and acupuncture—have been used specifically to manage spinal conditions such as low back pain, neck pain, and spinal stenosis (NCT02257723). Studies from Korean medicine further assessed traditional approaches for lumbar spinal stenosis, lumbar spondylolisthesis, low back pain, and sciatica, reinforcing that traditional therapeutic modalities are directly applied to spinal conditions (NCT03879447, NCT03750591).
+
+Narrative reviews and systematic examinations provide additional support by detailing the role of Traditional Chinese Medicine (TCM) in managing spinal disorders. These reviews report that TCM interventions—including acupuncture, acupotomy, moxibustion, Chinese massage, and herbal formulations—have been historically and currently employed to treat lumbar intervertebral disc herniation and related spinal ailments (zhang2017anarrativereview pages 4-5, zhang2017anarrativereview pages 6-8, zhang2017anarrativereview pages 5-6, zhang2017anarrativereview pages 2-4, zhang2017anarrativereview pages 9-10). The documented use of ancient herbal recipes, such as Duhuojisheng Tang and Buyanghuanwu Tang, further establishes that traditional medicine is fundamentally linked to the treatment of spinal conditions (zhang2017anarrativereview pages 6-8, zhang2017anarrativereview pages 8-9).
+
+In addition, the identification of 108 clinical trials focusing on spinal conditions within the traditional medicine framework underscores the research community’s commitment to exploring this association (Clinical Trial Search: 85b4b05c6de0). Evidence from observational and interventional studies also shows that integrative Korean medicine—utilizing methods like acupuncture, herbal medicine, and pharmacopuncture—has been applied within hospital settings to address sciatica caused by lumbar intervertebral disc herniation (NCT03750591, NCT05273346).
+
+Moreover, traditional techniques have been extended beyond pain and mobility-related issues. For example, one study protocol examined the application of acupressure to address constipation in patients with spinal cord injuries, indicating that traditional medicine addresses a broader spectrum of complications associated with spinal conditions (NCT05558657).
+
+Collectively, these findings indicate that traditional medicine practices are not only associated with but are being actively evaluated and integrated in the management of spinal conditions. The convergence of clinical trial data, observational studies, and narrative reviews from multiple sources consistently support the claim that spinal conditions are indeed associated with traditional medicine (NCT02257723, NCT03879447, cho2014howcurrentclinical pages 1-2, zhang2017anarrativereview pages 4-5, zhang2017anarrativereview pages 6-8, Clinical Trial Search: 85b4b05c6de0, NCT03750591, NCT05273346, NCT05558657, zhang2017anarrativereview pages 2-4, zhang2017anarrativereview pages 5-6, zhang2017anarrativereview pages 8-9, zhang2017anarrativereview pages 9-10).
+

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traité des maladies de la moelle épinière</title>
+    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        #network {
+            width: 100%;
+            height: 100vh;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        h1 {
+            text-align: center;
+            margin: 10px 0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Traité de la moelle épinière (20 random pages) </h1>
+    <div id="network"></div>
+
+    <script>
+        // Define nodes
+        const nodesData = [
+            { id: 'myelitis_inflammation', label: 'Myelitis Inflammation', group: 'ClinicalObservation' },
+            { id: 'paralysis_movement_sensation', label: 'Paralysis Movement Sensation', group: 'ClinicalObservation' },
+            { id: 'disorganized_grey_matter', label: 'Disorganized Grey Matter', group: 'MechanisticConcept' },
+            { id: 'descending_paralysis', label: 'Descending Paralysis', group: 'ClinicalObservation' },
+            { id: 'ascending_paralysis', label: 'Ascending Paralysis', group: 'ClinicalObservation' },
+            { id: 'paraplegia', label: 'Paraplegia', group: 'ClinicalObservation' },
+            { id: 'progressive_weakness_lower_limbs', label: 'Progressive Weakness Lower Limbs', group: 'ClinicalObservation' },
+            { id: 'preserved_sensitivity', label: 'Preserved Sensitivity', group: 'ClinicalObservation' },
+            { id: 'contracture_limbs', label: 'Contracture Limbs', group: 'ClinicalObservation' },
+            { id: 'constipation_habitual', label: 'Habitual Constipation', group: 'ClinicalObservation' },
+            { id: 'involuntary_urination', label: 'Involuntary Urination', group: 'ClinicalObservation' },
+            { id: 'sanguine_temperament', label: 'Sanguine Temperament', group: 'ContextualFactor' },
+            { id: 'robust_constitution', label: 'Robust Constitution', group: 'ContextualFactor' },
+            { id: 'masturbation', label: 'Masturbation', group: 'ContextualFactor' },
+            { id: 'weakness_post_masturbation', label: 'Weakness Post Masturbation', group: 'ClinicalObservation' },
+            { id: 'blennorrhagia', label: 'Blennorrhagia', group: 'ClinicalObservation' },
+            { id: 'vapor_baths', label: 'Vapor Baths', group: 'TherapeuticApproach' },
+            { id: 'irritating_frictions', label: 'Irritating Frictions', group: 'TherapeuticApproach' },
+            { id: 'cauterets_waters', label: 'Cauterets Waters', group: 'TherapeuticApproach' },
+            { id: 'no_improvement_cauterets', label: 'No Improvement Cauterets', group: 'TherapeuticOutcome' },
+            { id: 'salted_hot_douches', label: 'Salted Hot Douches', group: 'TherapeuticApproach' },
+            { id: 'cantharides_frictions', label: 'Cantharides Frictions', group: 'TherapeuticApproach' },
+            { id: 'improved_mobility_cane', label: 'Improved Mobility Cane', group: 'TherapeuticOutcome' },
+            { id: 'digne_waters', label: 'Digne Waters', group: 'TherapeuticApproach' },
+            { id: 'worsened_weakness_digne', label: 'Worsened Weakness Digne', group: 'TherapeuticOutcome' },
+            { id: 'plaster_bougies', label: 'Plaster Bougies', group: 'TherapeuticApproach' },
+            { id: 'laffecteur_rob', label: 'Laffecteur Rob', group: 'TherapeuticApproach' },
+            { id: 'daran_bougies', label: 'Daran Bougies', group: 'TherapeuticApproach' },
+            { id: 'sensitivity_loss_right_lower_limb', label: 'Sensitivity Loss Right Lower Limb', group: 'ClinicalObservation' },
+            { id: 'greoux_waters', label: 'Greoux Waters', group: 'TherapeuticApproach' },
+            { id: 'no_improvement_greoux', label: 'No Improvement Greoux', group: 'TherapeuticOutcome' },
+            { id: 'rapid_contractions_paralyzed_limbs', label: 'Rapid Contractions Paralyzed Limbs', group: 'ClinicalObservation' },
+            { id: 'bladder_inflammation', label: 'Bladder Inflammation', group: 'ClinicalObservation' },
+            { id: 'lower_limb_coolness', label: 'Lower Limb Coolness', group: 'ClinicalObservation' },
+            { id: 'no_sweating_lower_limbs', label: 'No Sweating Lower Limbs', group: 'ClinicalObservation' },
+            { id: 'fatigue_right_arm', label: 'Fatigue Right Arm', group: 'ClinicalObservation' },
+            { id: 'altered_touch_sensation', label: 'Altered Touch Sensation', group: 'ClinicalObservation' },
+            { id: 'rigid_fingers_right_hand', label: 'Rigid Fingers Right Hand', group: 'ClinicalObservation' },
+            { id: 'galvanic_leg_extension', label: 'Galvanic Leg Extension', group: 'ClinicalObservation' },
+            { id: 'respiratory_difficulty', label: 'Respiratory Difficulty', group: 'ClinicalObservation' },
+            { id: 'weak_voice', label: 'Weak Voice', group: 'ClinicalObservation' },
+            { id: 'pectoral_muscle_contracture', label: 'Pectoral Muscle Contracture', group: 'ClinicalObservation' },
+            { id: 'Ollivier_1827', label: 'Ollivier 1827', group: 'SourceText' },
+            { id: 'numbness_fingers_toes', label: 'Numbness Fingers Toes', group: 'ClinicalObservation' },
+            { id: 'deep_spinal_pain', label: 'Deep Spinal Pain', group: 'ClinicalObservation' },
+            { id: 'convulsions_myelitis', label: 'Convulsions Myelitis', group: 'ClinicalObservation' },
+            { id: 'chronic_myelitis', label: 'Chronic Myelitis', group: 'ClinicalObservation' },
+            { id: 'antiphlogistic_treatment', label: 'Antiphlogistic Treatment', group: 'TherapeuticApproach' },
+            { id: 'recovery_three_months', label: 'Recovery Three Months', group: 'TherapeuticOutcome' },
+            { id: 'dorsal_pain_two_years', label: 'Dorsal Pain Two Years', group: 'ClinicalObservation' },
+            { id: 'Marinus', label: 'Marinus', group: 'SourceText' },
+            { id: 'atrophy_spinal_cord', label: 'Atrophy Spinal Cord', group: 'MechanisticConcept' },
+            { id: 'cartilaginous_plaques_arachnoid', label: 'Cartilaginous Plaques Arachnoid', group: 'MechanisticConcept' },
+            { id: 'fongus_dura_mater', label: 'Fongus Dura Mater', group: 'MechanisticConcept' },
+            { id: 'encephaloid_tumors', label: 'Encephaloid Tumors', group: 'MechanisticConcept' },
+            { id: 'Wolf_1825', label: 'Wolf 1825', group: 'SourceText' },
+            { id: 'Colin_1824', label: 'Colin 1824', group: 'SourceText' },
+            { id: 'Serres_1825', label: 'Serres 1825', group: 'SourceText' }
+        ];
+
+        // Define edges
+        const edgesData = [
+            { from: 'myelitis_inflammation', to: 'paralysis_movement_sensation', label: 'co_occurs_with' },
+            { from: 'myelitis_inflammation', to: 'disorganized_grey_matter', label: 'associated_with' },
+            { from: 'paralysis_movement_sensation', to: 'descending_paralysis', label: 'co_occurs_with' },
+            { from: 'paralysis_movement_sensation', to: 'ascending_paralysis', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'Ollivier_1827', label: 'described_in' },
+            { from: 'chronic_myelitis', to: 'Ollivier_1827', label: 'described_in' },
+            { from: 'Sensitivity Loss Right Lower Limb', to: 'Ollivier_1827', label: 'described_in' },
+            { from: 'weakness_post_masturbation', to: 'Ollivier_1827', label: 'described_in' },
+            { from: 'paraplegia', to: 'progressive_weakness_lower_limbs', label: 'preceded_by' },
+            { from: 'paraplegia', to: 'preserved_sensitivity', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'contracture_limbs', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'sensitivity_loss_right_lower_limb', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'constipation_habitual', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'involuntary_urination', label: 'co_occurs_with' },
+            { from: 'weakness_post_masturbation', to: 'masturbation', label: 'associated_with' },
+            { from: 'paraplegia', to: 'sanguine_temperament', label: 'modified_by' },
+            { from: 'paraplegia', to: 'robust_constitution', label: 'modified_by' },
+            { from: 'weakness_post_masturbation', to: 'blennorrhagia', label: 'followed_by' },
+            { from: 'paraplegia', to: 'vapor_baths', label: 'responds_to' },
+            { from: 'paraplegia', to: 'irritating_frictions', label: 'responds_to' },
+            { from: 'paraplegia', to: 'cauterets_waters', label: 'responds_to' },
+            { from: 'paraplegia', to: 'no_improvement_cauterets', label: 'results_in' },
+            { from: 'paraplegia', to: 'salted_hot_douches', label: 'responds_to' },
+            { from: 'paraplegia', to: 'cantharides_frictions', label: 'responds_to' },
+            { from: 'paraplegia', to: 'improved_mobility_cane', label: 'results_in' },
+            { from: 'paraplegia', to: 'digne_waters', label: 'responds_to' },
+            { from: 'paraplegia', to: 'worsened_weakness_digne', label: 'results_in' },
+            { from: 'involuntary_urination', to: 'plaster_bougies', label: 'responds_to' },
+            { from: 'involuntary_urination', to: 'laffecteur_rob', label: 'responds_to' },
+            { from: 'sensitivity_loss_right_lower_limb', to: 'daran_bougies', label: 'responds_to' },
+            { from: 'paraplegia', to: 'greoux_waters', label: 'responds_to' },
+            { from: 'paraplegia', to: 'no_improvement_greoux', label: 'results_in' },
+            { from: 'paraplegia', to: 'rapid_contractions_paralyzed_limbs', label: 'co_occurs_with' },
+            { from: 'involuntary_urination', to: 'bladder_inflammation', label: 'followed_by' },
+            { from: 'paraplegia', to: 'lower_limb_coolness', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'no_sweating_lower_limbs', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'fatigue_right_arm', label: 'followed_by' },
+            { from: 'paraplegia', to: 'altered_touch_sensation', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'rigid_fingers_right_hand', label: 'followed_by' },
+            { from: 'paraplegia', to: 'galvanic_leg_extension', label: 'co_occurs_with' },
+            { from: 'paraplegia', to: 'respiratory_difficulty', label: 'followed_by' },
+            { from: 'paraplegia', to: 'weak_voice', label: 'followed_by' },
+            { from: 'paraplegia', to: 'pectoral_muscle_contracture', label: 'followed_by' },
+            { from: 'myelitis_inflammation', to: 'Ollivier_1827', label: 'described_in' },
+            { from: 'myelitis_inflammation', to: 'numbness_fingers_toes', label: 'preceded_by' },
+            { from: 'myelitis_inflammation', to: 'deep_spinal_pain', label: 'co_occurs_with' },
+            { from: 'myelitis_inflammation', to: 'convulsions_myelitis', label: 'co_occurs_with' },
+            { from: 'chronic_myelitis', to: 'antiphlogistic_treatment', label: 'responds_to' },
+            { from: 'chronic_myelitis', to: 'recovery_three_months', label: 'results_in' },
+            { from: 'chronic_myelitis', to: 'dorsal_pain_two_years', label: 'preceded_by' },
+            { from: 'chronic_myelitis', to: 'Marinus', label: 'described_in' },
+            { from: 'atrophy_spinal_cord', to: 'paraplegia', label: 'associated_with' },
+            { from: 'cartilaginous_plaques_arachnoid', to: 'myelitis_inflammation', label: 'associated_with' },
+            { from: 'fongus_dura_mater', to: 'paraplegia', label: 'associated_with' },
+            { from: 'encephaloid_tumors', to: 'paraplegia', label: 'associated_with' },
+            { from: 'encephaloid_tumors', to: 'Wolf_1825', label: 'described_in' },
+            { from: 'encephaloid_tumors', to: 'Colin_1824', label: 'described_in' },
+            { from: 'fongus_dura_mater', to: 'Serres_1825', label: 'described_in' }
+        ];
+
+        // Create a network
+        const container = document.getElementById('network');
+        const nodes = new vis.DataSet(nodesData);
+        const edges = new vis.DataSet(edgesData);
+
+        // Provide the data in the vis format
+        const data = {
+            nodes: nodes,
+            edges: edges
+        };
+
+        // Configuration options
+        const options = {
+            nodes: {
+                shape: 'dot',
+                size: 20,
+                font: {
+                    size: 12,
+                    face: 'Arial'
+                },
+                borderWidth: 2
+            },
+            edges: {
+                arrows: 'to',
+                font: {
+                    size: 10,
+                    align: 'middle'
+                },
+                smooth: {
+                    type: 'continuous'
+                }
+            },
+            groups: {
+                ClinicalObservation: { color: { background: '#FF9999', border: '#CC6666' } },
+                MechanisticConcept: { color: { background: '#99CCFF', border: '#6699CC' } },
+                TherapeuticOutcome: { color: { background: '#99FF99', border: '#66CC66' } },
+                SourceText: { color: { background: '#FFFF99', border: '#CCCC66' } },
+                ContextualFactor: { color: { background: '#FFCC99', border: '#CC9966' } },
+                TherapeuticApproach: { color: { background: '#CC99FF', border: '#9966CC' } }
+            },
+            physics: {
+                forceAtlas2Based: {
+                    gravitationalConstant: -50,
+                    centralGravity: 0.01,
+                    springLength: 100,
+                    springConstant: 0.08
+                },
+                maxVelocity: 50,
+                solver: 'forceAtlas2Based',
+                timestep: 0.35,
+                stabilization: { iterations: 150 }
+            },
+            interaction: {
+                hover: true,
+                zoomView: true,
+                dragView: true
+            }
+        };
+
+        // Initialize and render the network
+        const network = new vis.Network(container, data, options);
+    </script>
+</body>
+</html>
